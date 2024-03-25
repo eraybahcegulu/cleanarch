@@ -16,13 +16,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\Core\api.Application\api.Application.csproj" />
     <ProjectReference Include="..\..\Infrastructure\api.Infrastructure\api.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Infrastructure\api.Persistence\api.Persistence.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>
