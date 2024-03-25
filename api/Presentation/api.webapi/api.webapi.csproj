@@ -21,8 +21,4 @@
     <ProjectReference Include="..\..\Infrastructure\api.Persistence\api.Persistence.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
 </Project>
