@@ -1,4 +1,5 @@
 ﻿using api.Application.Repositories;
+using api.Application.RequestParameters;
 using api.Application.ViewModels.Products;
 using api.Domain.Entities;
 using Microsoft.AspNetCore.Http;
@@ -25,15 +26,32 @@ namespace api.webapi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get([FromQuery]Pagination pagination)
         {
-            return Ok(_productReadRepository.GetAll(false)); //EF Core tracking false performans - Get işlemlerinde tracking false
+            var totalCount = _productReadRepository.GetAll(false).Count();
+            var products = _productReadRepository.GetAll(false).Skip(pagination.Page * pagination.Size).Take(pagination.Size).Select(p => new
+            {
+                p.Id,
+                p.Name,
+                p.Stock,
+                p.Price,
+                p.CreatedDate,
+                p.UpdatedDate
+            }).ToList();
+
+            return Ok(
+                new
+                {
+                    totalCount,
+                    products
+                }
+              );
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(string id)
         {
-            return Ok(_productReadRepository.GetByIdAsync(id, false)); //EF Core tracking false performans - Get işlemlerinde tracking false
+            return Ok(await _productReadRepository.GetByIdAsync(id, false)); //EF Core tracking false performans - Get işlemlerinde tracking false
         }
 
         [HttpPost]
