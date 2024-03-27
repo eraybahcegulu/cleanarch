@@ -1,7 +1,7 @@
 import { TableColumnsType } from "antd";
-import { Product } from "../../types/index";
+import { IProduct } from "../../types/index";
 
-export const productColumns: TableColumnsType<Product> = [
+export const productColumns: TableColumnsType<IProduct> = [
     {
         title: 'Name',
         dataIndex: 'name',

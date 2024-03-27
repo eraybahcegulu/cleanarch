@@ -1,4 +1,4 @@
-export interface Product {
+export interface IProduct {
     id: string;
     name: string;
     stock: number;
@@ -7,23 +7,12 @@ export interface Product {
     updatedDate: string;
 }
 
-export interface ProductTable {
-    data: {
-        data: {
-            products: Product[];
-            totalCount: number;
-        };
-    }
-
-    isFetching: boolean;
-}
-
-export interface CreateProduct {
+export interface ICreateProduct {
     name: string;
     stock: number;
     price: number;
 }
 
-export interface ErrorResponse {
+export interface IErrorResponse {
     Errors: string[];
 }

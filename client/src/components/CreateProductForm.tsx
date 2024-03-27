@@ -17,8 +17,8 @@ const CreateProduct = () => {
     const queryClient = useQueryClient()
     const createMutation = useMutation('createProduct', createProductService,
         {
-            onSuccess: () => {
-                queryClient.invalidateQueries('products')
+            onSuccess: async () => {
+                await queryClient.invalidateQueries('products')
                 toast.success("Product created successfully");
                 
             },
