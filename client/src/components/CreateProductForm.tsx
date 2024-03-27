@@ -9,9 +9,21 @@ import LoadingButton from "./LoadingButton";
 
 
 const createProductValidator = Yup.object({
-    name: Yup.string().trim().required("Name required to create product"),
-    stock: Yup.number().typeError("Stock must be a number").required("Price required to create product"),
-    price: Yup.number().typeError("Price must be a number").required("Price required to create product"),
+    name: Yup.string()
+            .trim()
+            .required("Name required to create product")
+            .min(5, "Name must be at least 5 characters")
+            .max(50, "Name must be at most 50 characters"),
+
+    stock: Yup.number()
+            .typeError("Stock must be a number")
+            .required("Stock required to create product")
+            .min(0, "Stock must be 0 or greater"),
+
+    price: Yup.number()
+            .typeError("Price must be a number")
+            .required("Price required to create product")
+            .min(0, "Price must be 0 or greater"),
 });
 
 const CreateProduct = () => {
@@ -61,13 +73,13 @@ const CreateProduct = () => {
                         </div>
 
                         <div>
-                            <Field name="stock" as={Input} maxLength={20} variant='bordered' label="Stock" />
+                            <Field name="stock" type="number" as={Input} maxLength={20} variant='bordered' label="Stock" />
                             <ErrorMessage name="stock" component="div" className="text-red-500 text-xs" />
                         </div>
 
 
                         <div>
-                            <Field name="price" as={Input} maxLength={20} variant='bordered' label="Price" />
+                            <Field name="price" type="number" as={Input} maxLength={20} variant='bordered' label="Price" />
                             <ErrorMessage name="price" component="div" className="text-red-500 text-xs" />
                         </div>
                     </div>
