@@ -16,8 +16,6 @@ const GetProducts = () => {
 
     return (
             <ProductTable isFetching={isFetching} data={data} />
-
-
     )
 }
 

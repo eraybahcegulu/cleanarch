@@ -17,3 +17,13 @@ export interface ProductTable {
 
     isFetching: boolean;
 }
+
+export interface CreateProduct {
+    name: string;
+    stock: number;
+    price: number;
+}
+
+export interface ErrorResponse {
+    Errors: string[];
+}
