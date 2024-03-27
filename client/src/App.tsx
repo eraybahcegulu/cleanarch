@@ -5,13 +5,9 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          path="/home"
-          element={<Home />}
-        />
 
         <Route
-          path="/"
+          path="/home"
           element={<Home />}
         />
 
