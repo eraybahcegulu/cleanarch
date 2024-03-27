@@ -6,3 +6,14 @@ export interface Product {
     createdDate: string;
     updatedDate: string;
 }
+
+export interface ProductTable {
+    data: {
+        data: {
+            products: Product[];
+            totalCount: number;
+        };
+    }
+
+    isFetching: boolean;
+}
