@@ -35,7 +35,7 @@ const columns: TableColumnsType<Product> = [
 
 const Home = () => {
     const [currentPage, setCurrentPage] = useState<number>(0);
-    const { data, isLoading } = useQuery('products', () => getProductsService(currentPage, 5));
+    const { data, isLoading, isFetching } = useQuery('products', () => getProductsService(currentPage, 5));
     const queryClient = useQueryClient()
 
     const handlePage = async (page: number) => {
@@ -54,6 +54,10 @@ const Home = () => {
         return <div>Loading...</div>;
     }
 
+    if (isFetching) {
+        return <div>Loading...</div>;
+    }
+
     if (!data) {
         return <div>Error</div>;
     }
@@ -67,6 +71,7 @@ const Home = () => {
             pagination={{
                 pageSize: 5,
                 total: data.data.totalCount,
+                current: currentPage + 1,
             }}
             onChange={onChange}
         />
