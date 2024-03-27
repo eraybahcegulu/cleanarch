@@ -5,6 +5,7 @@ import { useMutation, useQueryClient } from "react-query";
 import { createProductService } from "../services/productService";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
+import LoadingButton from "./LoadingButton";
 
 
 const createProductValidator = Yup.object({
@@ -15,12 +16,12 @@ const createProductValidator = Yup.object({
 
 const CreateProduct = () => {
     const queryClient = useQueryClient()
-    const createMutation = useMutation('createProduct', createProductService,
+    const createProductMutation = useMutation('createProduct', createProductService,
         {
             onSuccess: async () => {
                 await queryClient.invalidateQueries('products')
                 toast.success("Product created successfully");
-                
+
             },
             onError: (error) => {
                 const axiosError = error as AxiosError;
@@ -44,7 +45,7 @@ const CreateProduct = () => {
             initialValues={{ name: "", stock: "", price: "" }}
             validationSchema={createProductValidator}
             onSubmit={async (values) => {
-                await createMutation.mutateAsync({
+                await createProductMutation.mutateAsync({
                     name: values.name,
                     stock: parseInt(values.stock),
                     price: parseFloat(values.price),
@@ -70,9 +71,15 @@ const CreateProduct = () => {
                             <ErrorMessage name="price" component="div" className="text-red-500 text-xs" />
                         </div>
                     </div>
-                    <Button type='submit' color="primary" variant="shadow" >
-                        Create
-                    </Button>
+                    {
+                        createProductMutation.isLoading
+                            ?
+                            <LoadingButton color="primary" className={undefined} />
+                            :
+                            <Button type='submit' color="primary" variant="shadow" >
+                                Create
+                            </Button>
+                    }
                 </div>
             </Form>
         </Formik>
