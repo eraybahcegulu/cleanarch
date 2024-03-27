@@ -7,8 +7,8 @@ import { getProductsService } from '../services/productService';
 import LoadingSpinner from './LoadingSpinner';
 
 const ProductsTable = () => {
-    const { data, isLoading, isFetching } = useQuery('products', () => getProductsService(0, 5));
     const [currentPage, setCurrentPage] = useState<number>(0);
+    const { data, isLoading, isFetching } = useQuery('products', () => getProductsService(currentPage, 5));
     const queryClient = useQueryClient()
 
     const handlePage = async (page: number) => {
