@@ -13,7 +13,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <NextUIProvider>
       <Toaster />
       <QueryClientProvider client={queryClient}>
-          <App />
+        <App />
       </QueryClientProvider>
     </NextUIProvider>
   </React.StrictMode>,
