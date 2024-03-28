@@ -1,3 +1,4 @@
+using api.Application;
 using api.Application.Validators.Products;
 using api.Infrastructure;
 using api.Infrastructure.Filters;
@@ -10,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddInfrastructureServices();
 builder.Services.AddPersistenceServices();
+builder.Services.AddApplicationServices();
 
 builder.Services.AddStorage<LocalStorage>();
 //builder.Services.AddStorage <AzureStorage>();

@@ -1,14 +1,14 @@
-﻿using System;
+﻿using MediatR;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace api.Application.ViewModels.Products
+namespace api.Application.Features.Commands.Product.CreateProduct
 {
-    public class VM_Update_Product
+    public class CreateProductCommandRequest : IRequest<CreateProductCommandResponse>
     {
-        public string Id { get; set; }
         public string Name { get; set; }
         public int Stock { get; set; }
         public float Price { get; set; }
