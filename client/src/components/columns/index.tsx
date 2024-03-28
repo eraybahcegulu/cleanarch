@@ -1,7 +1,7 @@
 import { TableColumnsType } from "antd";
 import { IProduct } from "../../types/index";
-import { RiEditLine } from "react-icons/ri";
 import DeleteProduct from "../DeleteProduct";
+import UpdateProductModal from "../UpdateProductModal";
 
 export const productsTableColumns: TableColumnsType<IProduct> = [
     {
@@ -32,7 +32,7 @@ export const productsTableColumns: TableColumnsType<IProduct> = [
         width: '12%',
         render: (_, record: IProduct) => (
             <div className='flex flex-row justify-between text-2xl h-full w-full max-h-full'>
-                <RiEditLine onClick={() => console.log(record.id)} className="hover:scale-105 hover:opacity-70 cursor-pointer transition-all text-blue-600" />
+                <UpdateProductModal product={record} />
                 <DeleteProduct id={record.id}  />
             </div>
         ),

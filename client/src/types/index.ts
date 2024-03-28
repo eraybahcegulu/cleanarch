@@ -17,6 +17,13 @@ export interface IDeleteProduct {
     id: string;
 }
 
+export interface IUpdateProduct {
+    id: string;
+    name: string;
+    stock: number;
+    price: number;
+}
+
 export interface IErrorResponse {
     Errors: string[];
 }
