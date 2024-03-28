@@ -13,6 +13,10 @@ export interface ICreateProduct {
     price: number;
 }
 
+export interface IDeleteProduct {
+    id: string;
+}
+
 export interface IErrorResponse {
     Errors: string[];
 }

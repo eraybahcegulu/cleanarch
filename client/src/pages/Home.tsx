@@ -1,7 +1,6 @@
 import CreateProductForm from '../components/CreateProductForm';
 import ProductsTable from '../components/ProductsTable';
 
-
 const Home = () => {
 
     return (

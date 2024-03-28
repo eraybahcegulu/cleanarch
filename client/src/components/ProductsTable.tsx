@@ -1,6 +1,6 @@
 import { Table, type TableProps } from 'antd';
 import { useState } from 'react'
-import { productColumns } from './columns/index';
+import { productsTableColumns } from './columns/index';
 import { IProduct } from '../types';
 import { useQuery, useQueryClient } from 'react-query';
 import { getProductsService } from '../services/productService';
@@ -8,12 +8,15 @@ import LoadingSpinner from './LoadingSpinner';
 
 const ProductsTable = () => {
     const [currentPage, setCurrentPage] = useState<number>(0);
-    const { data, isLoading, isFetching } = useQuery('products', () => getProductsService(currentPage, 5));
+    const { data, isLoading } = useQuery('products', () => getProductsService(currentPage, 5));
+    const [pageChanging, setIsPageChanging] = useState<boolean>(false);
     const queryClient = useQueryClient()
 
     const handlePage = async (page: number) => {
+        setIsPageChanging(true);
         setCurrentPage(page);
         await queryClient.fetchQuery('products', () => getProductsService(page, 5));
+        setIsPageChanging(false);
     }
 
     const onChange: TableProps<IProduct>['onChange'] = async (pagination, filters, sorter, extra) => {
@@ -34,7 +37,7 @@ const ProductsTable = () => {
     return (
         <Table
             rowKey="id"
-            columns={productColumns}
+            columns={productsTableColumns}
             dataSource={data.data.products}
             pagination={{
                 pageSize: 5,
@@ -44,7 +47,7 @@ const ProductsTable = () => {
             className="max-w-[475px] md:max-w-[750px] xl:max-w-[900px]"
             scroll={{ y: 630, x: 800 }}
             onChange={onChange}
-            loading={isFetching}
+            loading={pageChanging}
         />
     )
 }

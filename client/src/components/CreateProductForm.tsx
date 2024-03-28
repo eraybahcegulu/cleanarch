@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from "react-query";
 import { createProductService } from "../services/productService";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
-import LoadingButton from "./LoadingButton";
+import {LoadingButton} from "./Loading";
 
 
 const createProductValidator = Yup.object({
