@@ -3,13 +3,13 @@ import { IProduct } from '../types'
 import { Modal } from 'antd'
 import { useState } from 'react';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import * as Yup from "yup";
 import { Button, Input } from '@nextui-org/react';
 import { useMutation, useQueryClient } from 'react-query';
 import { updateProductService } from '../services/productService';
 import toast from 'react-hot-toast';
 import { AxiosError } from 'axios';
 import { LoadingButton } from './Loading';
+import { updateProductValidator } from './validators';
 
 const UpdateProductModal = ({ product }: { product: IProduct }) => {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -26,23 +26,7 @@ const UpdateProductModal = ({ product }: { product: IProduct }) => {
         setIsModalOpen(false);
     };
 
-    const createProductValidator = Yup.object({
-        name: Yup.string()
-            .trim()
-            .required("Name required to create product")
-            .min(5, "Name must be at least 5 characters")
-            .max(50, "Name must be at most 50 characters"),
 
-        stock: Yup.number()
-            .typeError("Stock must be a number")
-            .required("Stock required to create product")
-            .min(0, "Stock must be 0 or greater"),
-
-        price: Yup.number()
-            .typeError("Price must be a number")
-            .required("Price required to create product")
-            .min(0, "Price must be 0 or greater"),
-    });
 
     const queryClient = useQueryClient()
     const updateProductMutation = useMutation('updateProduct', updateProductService,
@@ -77,7 +61,7 @@ const UpdateProductModal = ({ product }: { product: IProduct }) => {
             <Modal className='flex justify-center items-center' title="Update Product" open={isModalOpen} onOk={handleOk} footer onCancel={handleCancel}>
                 <Formik
                     initialValues={{ name: product.name, stock: product.stock, price: product.price }}
-                    validationSchema={createProductValidator}
+                    validationSchema={updateProductValidator}
                     onSubmit={async (values) => {
                         await updateProductMutation.mutateAsync({
                             id: product.id,

@@ -1,30 +1,11 @@
 import { Formik, Field, Form, ErrorMessage, } from "formik";
 import { Button, Input } from '@nextui-org/react';
-import * as Yup from "yup";
 import { useMutation, useQueryClient } from "react-query";
 import { createProductService } from "../services/productService";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
 import {LoadingButton} from "./Loading";
-
-
-const createProductValidator = Yup.object({
-    name: Yup.string()
-            .trim()
-            .required("Name required to create product")
-            .min(5, "Name must be at least 5 characters")
-            .max(50, "Name must be at most 50 characters"),
-
-    stock: Yup.number()
-            .typeError("Stock must be a number")
-            .required("Stock required to create product")
-            .min(0, "Stock must be 0 or greater"),
-
-    price: Yup.number()
-            .typeError("Price must be a number")
-            .required("Price required to create product")
-            .min(0, "Price must be 0 or greater"),
-});
+import { createProductValidator } from "./validators";
 
 const CreateProduct = () => {
     const queryClient = useQueryClient()

@@ -1,34 +1,13 @@
 import { Button, Input } from "@nextui-org/react";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-
-import * as Yup from "yup";
-
-const validationSchema = Yup.object({
-    nameSurname: Yup.string()
-        .required("Name and Surname required to register"),
-
-    userName: Yup.string()
-        .required("Username required to register"),
-
-    email: Yup.string()
-        .email("Invalid email format")
-        .required("Email required to register"),
-
-    password: Yup.string()
-        .required("Password required to register"),
-
-    confirmPassword: Yup.string()
-
-        .oneOf([Yup.ref("password")], "Passwords must match")
-        .required("Confirm Password required to register"),
-});
+import { userRegisterValidator } from "./validators";
 
 const RegisterForm = () => {
 
     return (
         <Formik
             initialValues={{ nameSurname: "", userName: "", email: "", password: "", confirmPassword: "" }}
-            validationSchema={validationSchema}
+            validationSchema={userRegisterValidator}
             onSubmit={async (values) => {
                 console.log(values)
             }}
