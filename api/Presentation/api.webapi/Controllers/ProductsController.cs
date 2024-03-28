@@ -18,24 +18,11 @@ namespace api.webapi.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        readonly private IProductWriteRepository _productWriteRepository;
-        readonly private IProductReadRepository _productReadRepository;
-        readonly private IProductImageFileWriteRepository _productImageFileWriteRepository;
-        readonly private IStorageService _storageService;
-
         readonly IMediator _mediator;
 
         public ProductsController(
-            IProductWriteRepository productWriteRepository,
-            IProductReadRepository productReadRepository,
-            IStorageService storageService,
-            IProductImageFileWriteRepository productImageFileWriteRepository,
             IMediator mediator)
         {
-            _productWriteRepository = productWriteRepository;
-            _productReadRepository = productReadRepository;
-            _storageService = storageService;
-            _productImageFileWriteRepository = productImageFileWriteRepository;
             _mediator = mediator;
         }
 
