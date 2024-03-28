@@ -5,12 +5,14 @@ import { IProduct } from '../types';
 import { useQuery, useQueryClient } from 'react-query';
 import { getProductsService } from '../services/productService';
 import LoadingSpinner from './LoadingSpinner';
+import { usePaginationStore } from '../zustand/ProductsPagination'
 
 const ProductsTable = () => {
-    const [currentPage, setCurrentPage] = useState<number>(0);
-    const { data, isLoading } = useQuery('products', () => getProductsService(currentPage, 5));
+    const { data, isLoading, isFetching} = useQuery('products', () => getProductsService(currentPage, 5));
     const [pageChanging, setIsPageChanging] = useState<boolean>(false);
     const queryClient = useQueryClient()
+    const { currentPage, setCurrentPage} = usePaginationStore();
+
 
     const handlePage = async (page: number) => {
         setIsPageChanging(true);
@@ -47,7 +49,7 @@ const ProductsTable = () => {
             className="max-w-[475px] md:max-w-[750px] xl:max-w-[900px]"
             scroll={{ y: 630, x: 800 }}
             onChange={onChange}
-            loading={pageChanging}
+            loading={pageChanging || isFetching}
         />
     )
 }
