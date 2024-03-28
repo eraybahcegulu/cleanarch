@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using api.Application.Repositories;
 using api.Persistence.Repositories;
+using api.Domain.Entities.Identity;
 
 namespace api.Persistence
 {
@@ -16,6 +17,16 @@ namespace api.Persistence
         public static void AddPersistenceServices(this IServiceCollection services)
         {
             services.AddDbContext<apiDbContext>(options => options.UseNpgsql(Configuration.ConnectionString));
+
+            services.AddIdentity<AppUser, AppRole>(options =>
+            {
+                options.Password.RequiredLength = 3;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                //options.User.AllowedUserNameCharacters
+            }).AddEntityFrameworkStores<apiDbContext>();
 
             services.AddScoped<ICustomerReadRepository, CustomerReadRepository>();
             services.AddScoped<ICustomerWriteRepository, CustomerWriteRepository>();

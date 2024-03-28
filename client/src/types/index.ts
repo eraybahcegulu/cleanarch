@@ -27,3 +27,19 @@ export interface IUpdateProduct {
 export interface IErrorResponse {
     Errors: string[];
 }
+
+export interface IRegister {
+    nameSurname: string;
+    username: string;
+    email: string;
+    password: string;
+    passwordConfirm: string;
+}
+
+export interface ILogin {
+    usernameOrEmail: string;
+    password: string;
+}
+export interface ErrorResponse {
+    Errors: string[];
+}

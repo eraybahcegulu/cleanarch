@@ -1,5 +1,7 @@
 ﻿using api.Domain.Entities;
 using api.Domain.Entities.Common;
+using api.Domain.Entities.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace api.Persistence.Contexts
 {
-    public class apiDbContext : DbContext
+    public class apiDbContext : IdentityDbContext<AppUser, AppRole, string>
     {
         public apiDbContext(DbContextOptions options) : base(options)
         {}

@@ -1,11 +1,11 @@
-import RegisterForm from '../components/RegisterForm'
+import LoginForm from '../components/LoginForm'
 
-const Register = () => {
+const Login = () => {
     return (
         <div className='min-h-screen max-h-screen p-20 flex items-center justify-center'>
-            <RegisterForm />
+            <LoginForm />
         </div>
     )
 }
 
-export default Register
+export default Login

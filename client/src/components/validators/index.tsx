@@ -36,11 +36,11 @@ export const updateProductValidator = Yup.object({
                 .min(0, "Price must be 0 or greater"),
 });
 
-export const userRegisterValidator = Yup.object({
+export const registerValidator = Yup.object({
         nameSurname: Yup.string()
                 .required("Name and Surname required to register"),
 
-        userName: Yup.string()
+        username: Yup.string()
                 .required("Username required to register"),
 
         email: Yup.string()
@@ -50,8 +50,12 @@ export const userRegisterValidator = Yup.object({
         password: Yup.string()
                 .required("Password required to register"),
 
-        confirmPassword: Yup.string()
-
+        passwordConfirm: Yup.string()
                 .oneOf([Yup.ref("password")], "Passwords must match")
                 .required("Confirm Password required to register"),
+});
+
+export const loginValidator = Yup.object({
+        usernameOrEmail: Yup.string().required("Username or Email required to login"),
+        password: Yup.string().required("Password required to login"),
 });

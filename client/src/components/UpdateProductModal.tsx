@@ -26,8 +26,6 @@ const UpdateProductModal = ({ product }: { product: IProduct }) => {
         setIsModalOpen(false);
     };
 
-
-
     const queryClient = useQueryClient()
     const updateProductMutation = useMutation('updateProduct', updateProductService,
         {
@@ -63,6 +61,11 @@ const UpdateProductModal = ({ product }: { product: IProduct }) => {
                     initialValues={{ name: product.name, stock: product.stock, price: product.price }}
                     validationSchema={updateProductValidator}
                     onSubmit={async (values) => {
+                        if (product.name === values.name &&
+                            product.price === values.price &&
+                            product.stock === values.stock) {
+                            return toast.error("Not change found");
+                        }
                         await updateProductMutation.mutateAsync({
                             id: product.id,
                             name: values.name,
@@ -98,6 +101,7 @@ const UpdateProductModal = ({ product }: { product: IProduct }) => {
                                     <LoadingButton color='primary' className={undefined} />
                                     :
                                     <Button type='submit' color="primary" variant="shadow" >
+                                        
                                         Update
                                     </Button>
                             }
