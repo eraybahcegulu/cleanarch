@@ -6,18 +6,17 @@ import { useMutation } from "react-query";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
 import { LoadingButton } from "./Loading";
+import { IToken } from "../types";
 
 const LoginForm = () => {
 
     const loginMutation = useMutation('login', loginService,
         {
             onSuccess: async (res) => {
-                if (res.data.succeeded) {
+                const token: IToken = res.data.token;
+                if (token) {
                     toast.success("Login successful");
-                }
-                else {
-                    console.log(res)
-                    toast.error(res.data.message);
+                    localStorage.setItem("accessToken", token.accessToken);
                 }
 
             },

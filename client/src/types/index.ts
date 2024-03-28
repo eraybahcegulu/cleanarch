@@ -43,3 +43,8 @@ export interface ILogin {
 export interface ErrorResponse {
     Errors: string[];
 }
+
+export interface IToken{
+    accessToken: string;
+    expiration: Date;
+}

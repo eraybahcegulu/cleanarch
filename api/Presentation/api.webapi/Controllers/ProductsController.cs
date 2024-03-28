@@ -8,6 +8,7 @@ using api.Application.Repositories;
 using api.Application.RequestParameters;
 using api.Domain.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -16,6 +17,7 @@ namespace api.webapi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = "Admin")]
     public class ProductsController : ControllerBase
     {
         readonly IMediator _mediator;
