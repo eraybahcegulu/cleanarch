@@ -1,4 +1,5 @@
 ﻿using api.Application.DTOs;
+using api.Domain.Entities.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace api.Application.Abstractions.Token
 {
     public interface ITokenHandler
     {
-        DTOs.Token CreateAccessToken(int minute);
+        DTOs.Token CreateAccessToken(int second, AppUser user);
+        string CreateRefreshToken();
     }
 }
