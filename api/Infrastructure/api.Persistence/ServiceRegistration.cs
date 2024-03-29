@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 using api.Application.Repositories;
 using api.Persistence.Repositories;
 using api.Domain.Entities.Identity;
+using api.Application.Abstractions.Services;
+using api.Persistence.Services;
+using api.Application.Abstractions.Services.Authentications;
 
 namespace api.Persistence
 {
@@ -45,6 +48,11 @@ namespace api.Persistence
 
             services.AddScoped<IProductImageFileReadRepository, ProductImageFileReadRepository>();
             services.AddScoped<IProductImageFileWriteRepository, ProductImageFileWriteRepository>();
+
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IExternalAuthentication, AuthService>();
+            services.AddScoped<IInternalAuthentication, AuthService>();
         }
     }
 }

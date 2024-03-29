@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace api.Application.Features.Commands.AppUsers.LoginUser
+namespace api.Application.Features.Commands.AppUser.LoginUser
 {
     public class LoginUserCommandRequest : IRequest<LoginUserCommandResponse>
     {

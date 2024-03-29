@@ -1,6 +1,6 @@
 ﻿
 using api.Application.Features.Commands.AppUser.CreateUser;
-using api.Application.Features.Commands.AppUsers.LoginUser;
+using api.Application.Features.Commands.AppUser.LoginUser;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
